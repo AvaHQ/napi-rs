@@ -346,7 +346,7 @@ macro_rules! impl_typed_array {
             format!(
               "Expected {}, got {}Array",
               stringify!($name),
-              TypedArrayType::from(typed_array_type).as_ref()
+              typed_array_type
             ),
           ));
         }
@@ -498,7 +498,7 @@ macro_rules! impl_from_slice {
             format!(
               "Expected {}, got {}Array",
               stringify!($name),
-              TypedArrayType::from(typed_array_type).as_ref()
+              typed_array_type
             ),
           ));
         }
@@ -537,7 +537,7 @@ macro_rules! impl_from_slice {
             format!(
               "Expected {}, got {}Array",
               stringify!($name),
-              TypedArrayType::from(typed_array_type).as_ref()
+              typed_array_type
             ),
           ));
         }
@@ -700,9 +700,9 @@ impl<'scope> FromNapiValue for Uint8ClampedSlice<'scope> {
       return Err(Error::new(
         Status::InvalidArg,
         format!(
-          "Expected {}, got {}Array",
-          stringify!($name),
-          typed_array_type
+          "Expected {:?}, got {}",
+          TypedArrayType::Uint8Clamped,
+          stringify!(typed_array_type)
         ),
       ));
     }
