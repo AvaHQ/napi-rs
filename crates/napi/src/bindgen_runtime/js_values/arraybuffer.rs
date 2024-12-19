@@ -343,7 +343,11 @@ macro_rules! impl_typed_array {
         if typed_array_type != $typed_array_type as i32 {
           return Err(Error::new(
             Status::InvalidArg,
-            format!("Expected $name, got {}", typed_array_type),
+            format!(
+              "Expected {}, got {}Array",
+              stringify!($name),
+              TypedArrayType::from(typed_array_type).as_ref()
+            ),
           ));
         }
         Ok($name {
@@ -491,7 +495,11 @@ macro_rules! impl_from_slice {
         if typed_array_type != $typed_array_type as i32 {
           return Err(Error::new(
             Status::InvalidArg,
-            format!("Expected $name, got {}", typed_array_type),
+            format!(
+              "Expected {}, got {}Array",
+              stringify!($name),
+              TypedArrayType::from(typed_array_type).as_ref()
+            ),
           ));
         }
         Ok(if length == 0 {
@@ -526,7 +534,11 @@ macro_rules! impl_from_slice {
         if typed_array_type != $typed_array_type as i32 {
           return Err(Error::new(
             Status::InvalidArg,
-            format!("Expected $name, got {}", typed_array_type),
+            format!(
+              "Expected {}, got {}Array",
+              stringify!($name),
+              TypedArrayType::from(typed_array_type).as_ref()
+            ),
           ));
         }
         Ok(if length == 0 {
@@ -687,7 +699,11 @@ impl<'scope> FromNapiValue for Uint8ClampedSlice<'scope> {
     if typed_array_type != TypedArrayType::Uint8Clamped as i32 {
       return Err(Error::new(
         Status::InvalidArg,
-        format!("Expected $name, got {}", typed_array_type),
+        format!(
+          "Expected {}, got {}Array",
+          stringify!($name),
+          typed_array_type
+        ),
       ));
     }
     Ok(Self {
